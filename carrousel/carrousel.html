@@ -6,7 +6,17 @@
 	<link rel="stylesheet" href="carrousel.css">
 </head>
 <body>
-	<div id="carrousel">
+	
+	<ul class="chama_carrousel">
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt="">sdasdasdsasassdasadasd</a></li>
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
+	</ul>
+			
+
+	<!-- <div id="carrousel">
 		<div class="carrousel-container">
 			<div class="carrousel">
 				<ul>
@@ -22,6 +32,13 @@
 				<button data-dir="next">Next</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+	<script src="carrousel.js"></script>
+	<script>
+		$(".chama_carrousel").rdjCarrousel({
+			"setas":false
+		});
+	</script>
 </body>
 </html>

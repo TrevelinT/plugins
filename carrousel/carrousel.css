@@ -33,3 +33,8 @@
 .carrousel-controller button {
 
 }
+
+.carrousel-horizontal-li{
+	float:left;
+	list-style-type: none;
+}
