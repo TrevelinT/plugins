@@ -11,6 +11,8 @@
 
 $('#carrousel').djrCarrousel();
 
+// fazer merge com o carrousel-refatorado
+
 
 
 
