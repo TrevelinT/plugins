@@ -8,7 +8,8 @@ $.fn.rdjCarrousel = function(settings){
         "automatico":true,
         "tempoTransicao":1000,
         "width":1024,
-        "height":768
+        "height":768,
+        "esconderSetas":false
     }
 
     //SUBSTITUINDO AS OPÇÕES DO DESENVOLVEDOR SOBRE O DEFAULT
@@ -54,15 +55,30 @@ $.fn.rdjCarrousel = function(settings){
         carousel.width(config.width);
     }
 
+    //SE EFEITO VERTICAL
+    if(config.efeito == "vertical"){
+        $("> li",este).each(function(){       
+            contagem++;
+            $(this).addClass('carrousel-vertical-li');
+            $(this).attr('tamanho',$(this).height());
+            $(this).attr('contagem',contagem);
+            tamanho_ul += parseInt($(this).height());
+
+        });
+
+        este.css("height",tamanho_ul+"px");
+        carousel.height(config.height);
+    }
+
 
 
 
     //SE OPTOU POR SETAS
 
-    if(config.setas == true){
+    if(config.efeito == "horizontal" && config.setas == true){
         container.append("<div class=\"carrousel-controllers\"><button data-dir=\"prev\">Previous</button><button data-dir=\"next\">Next</button></div>")
 
-        //ESCONDENDO SETAS
+        //ESCONDENDO SETAS (colocar if se é para esconder as setas. Padrão é false)
         $(".carrousel-controllers > button[data-dir='prev']",container).hide();
 
         $(".carrousel-controllers > button[data-dir='next']",container).click(function(){
@@ -115,6 +131,7 @@ $.fn.rdjCarrousel = function(settings){
                     }
                 }
             }
+            // próximo passo é criar o plugin vertical
         });
     }
 
