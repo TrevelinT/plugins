@@ -7,11 +7,13 @@
 }
 
 .carrousel {
-
+	overflow: hidden;
+	position: relative;
+	left: 0;
 }
 
 .carrousel ul {
-
+	padding: 0;
 }
 
 .carrousel li {
@@ -37,4 +39,8 @@
 .carrousel-horizontal-li{
 	float:left;
 	list-style-type: none;
+}
+
+.ul-carrousel{
+	position: relative;
 }
