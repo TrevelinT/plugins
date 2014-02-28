@@ -8,13 +8,13 @@
 <body>
 	
 	<ul class="chama_carrousel">
-		<li><a href="#"><img src="http://lorempixel.com/200/500/" alt="">sdasdasdsasassdasadasd</a></li>
+		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt="">sdasdasdsasassdasadasd</a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 	</ul>
-	<ul class="chama_carrousel2">
+	<!--ul class="chama_carrousel2">
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt="">sdasdasdsasassdasadasd</a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
@@ -37,7 +37,7 @@
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
 		<li><a href="#"><img src="http://lorempixel.com/200/200/" alt=""></a></li>
-	</ul>
+	</ul-->
 			
 
 	<!-- <div id="carrousel">
@@ -60,17 +60,18 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
 	<script src="carrousel.js"></script>
 	<script>
-		$(".chama_carrousel").rdjCarrousel({
-			"width":600
+		var teste = $(".chama_carrousel").rdjCarrousel({
+			"width":600,
+			"efeito":"horizontal"
 		});
-		$(".chama_carrousel2").rdjCarrousel({
+		/*$(".chama_carrousel2").rdjCarrousel({
 			"width":1200
 		});
 		$(".chama_carrousel_vertical").rdjCarrousel({
 			"efeito":"vertical",
 			"height":700,
-			"transition":3000
-		});
+			"transition":100
+		});*/
 	</script>
 </body>
 </html>

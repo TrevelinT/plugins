@@ -22,9 +22,10 @@ $.fn.rdjCarrousel = function(settings){
         tamanho_ul = 0,
         contagem = 0,
         passando = false,
-        atual_direita = 0,
-        atual_esquerda = 1,
-        emTransicao = false;
+        atual_prev = 0,
+        atual_next = 1,
+        emTransicao = false,
+        object = {};
 
 
     //criando a estrutura
@@ -74,23 +75,20 @@ $.fn.rdjCarrousel = function(settings){
     //SE OPTOU POR SETAS
 
     if(config.efeito == "vertical" && config.setas == true){
-        container.prepend("<div class=\"carrousel-controllers\"><button data-dir=\"prev\">Previous</button><button data-dir=\"next\">Next</button></div>")
+        container.prepend("<div class=\"carrousel-controllers\"><button data-dir=\"prev\">Previous</button><button data-dir=\"next\">Next</button></div>");
 
-        //ESCONDENDO SETAS (colocar if se é para esconder as setas. Padrão é false)
-        $(".carrousel-controllers > button[data-dir='prev']",container).hide();
 
-        $(".carrousel-controllers > button[data-dir='next']",container).click(function(){
-
-            if(emTransicao == false){
+         object.next = function(){
+             if(emTransicao == false){
                 emTransicao = true;
                 top_atual = este.css('top').replace("px","");
                 if(top_atual == "auto"){
                     top_atual = 0;
                 }
                 if((+tamanho_ul + +top_atual) > config.height){
-                    passar = $("li[contagem="+atual_esquerda+"]",este).attr('tamanho');
-                    atual_direita++;
-                    atual_esquerda++;
+                    passar = $("li[contagem="+atual_next+"]",este).attr('tamanho');
+                    atual_prev++;
+                    atual_next++;
                     
                     este.animate({
                         top: +top_atual - passar + "px"
@@ -101,21 +99,23 @@ $.fn.rdjCarrousel = function(settings){
                     if((+tamanho_ul + (+top_atual - passar)) <= config.height) {
                        $(".carrousel-controllers > button[data-dir='next']",container).hide(); 
                     }
+                }else{
+                     emTransicao = false;
                 }
             }
-        }); 
+        }
 
-        $(".carrousel-controllers > button[data-dir='prev']",container).click(function(){
-             if(emTransicao == false){
+         object.prev = function(){
+              if(emTransicao == false){
                 emTransicao = true;
                 top_atual = este.css('top').replace("px","");
                 if(top_atual == "auto"){
                     top_atual = 0;
                 }
                 if((+top_atual) < 0) {
-                    passar = $("li[contagem="+atual_direita+"]",este).attr('tamanho'); //pega o atributo de tamanho da LI atual
-                    atual_direita--;
-                    atual_esquerda--;
+                    passar = $("li[contagem="+atual_prev+"]",este).attr('tamanho'); //pega o atributo de tamanho da LI atual
+                    atual_prev--;
+                    atual_next--;
                     // alert(+top_atual);
                     // alert(passar);
                     este.animate({
@@ -127,32 +127,41 @@ $.fn.rdjCarrousel = function(settings){
                     if((+top_atual + +passar) >= 0) {
                        $(".carrousel-controllers > button[data-dir='prev']",container).hide(); 
                     }
+                }else{
+                     emTransicao = false;
                 }
             }
-            // próximo passo é criar o plugin vertical
+        }
+
+
+
+        //ESCONDENDO SETAS (colocar if se é para esconder as setas. Padrão é false)
+        $(".carrousel-controllers > button[data-dir='prev']",container).hide();
+
+        $(".carrousel-controllers > button[data-dir='next']",container).click(function(){
+            object.next();
+        }); 
+
+        $(".carrousel-controllers > button[data-dir='prev']",container).click(function(){
+             object.prev();
         });
     }
 
     //SE OPTOU POR SETAS
 
     if(config.efeito == "horizontal" && config.setas == true){
-        container.append("<div class=\"carrousel-controllers\"><button data-dir=\"prev\">Previous</button><button data-dir=\"next\">Next</button></div>")
 
-        //ESCONDENDO SETAS (colocar if se é para esconder as setas. Padrão é false)
-        $(".carrousel-controllers > button[data-dir='prev']",container).hide();
-
-        $(".carrousel-controllers > button[data-dir='next']",container).click(function(){
-
-            if(emTransicao == false){
+        object.next = function(){
+             if(emTransicao == false){
                 emTransicao = true;
                 left_atual = este.css('left').replace("px","");
                 if(left_atual == "auto"){
                     left_atual = 0;
                 }
                 if((+tamanho_ul + +left_atual) > config.width){
-                    passar = $("li[contagem="+atual_esquerda+"]",este).attr('tamanho');
-                    atual_direita++;
-                    atual_esquerda++;
+                    passar = $("li[contagem="+atual_next+"]",este).attr('tamanho');
+                    atual_prev++;
+                    atual_next++;
                     
                     este.animate({
                         left: +left_atual - passar + "px"
@@ -163,21 +172,23 @@ $.fn.rdjCarrousel = function(settings){
                     if((+tamanho_ul + (+left_atual - passar)) <= config.width) {
                        $(".carrousel-controllers > button[data-dir='next']",container).hide(); 
                     }
+                }else{
+                     emTransicao = false;
                 }
             }
-        }); 
+        }
 
-        $(".carrousel-controllers > button[data-dir='prev']",container).click(function(){
-             if(emTransicao == false){
+         object.prev = function(){
+              if(emTransicao == false){
                 emTransicao = true;
                 left_atual = este.css('left').replace("px","");
                 if(left_atual == "auto"){
                     left_atual = 0;
                 }
                 if((+left_atual) < 0) {
-                    passar = $("li[contagem="+atual_direita+"]",este).attr('tamanho'); //pega o atributo de tamanho da LI atual
-                    atual_direita--;
-                    atual_esquerda--;
+                    passar = $("li[contagem="+atual_prev+"]",este).attr('tamanho'); //pega o atributo de tamanho da LI atual
+                    atual_prev--;
+                    atual_next--;
                     // alert(+left_atual);
                     // alert(passar);
                     este.animate({
@@ -189,10 +200,32 @@ $.fn.rdjCarrousel = function(settings){
                     if((+left_atual + +passar) >= 0) {
                        $(".carrousel-controllers > button[data-dir='prev']",container).hide(); 
                     }
+                }else{
+                     emTransicao = false;
                 }
             }
-            // próximo passo é criar o plugin vertical
+        }
+
+        container.append("<div class=\"carrousel-controllers\"><button data-dir=\"prev\">Previous</button><button data-dir=\"next\">Next</button></div>")
+
+         //ESCONDENDO SETAS (colocar if se é para esconder as setas. Padrão é false)
+        $(".carrousel-controllers > button[data-dir='prev']",container).hide();
+
+        $(".carrousel-controllers > button[data-dir='next']",container).click(function(){
+            object.next();
+        }); 
+
+        $(".carrousel-controllers > button[data-dir='prev']",container).click(function(){
+             object.prev();
         });
+
+        
     }
 
+    object.position = function(){
+       return atual_next;
+    }
+
+
+    return object;
 }
