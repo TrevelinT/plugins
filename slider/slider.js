@@ -58,14 +58,17 @@ if (typeof Object.create !== 'function') {
                 var button = "<div class=\"djr-slider-controller\">";
 
                 button += "<button class=\"djr-slider-button djr-s-button-prev\" data-dir=\"prev\">";
-                button += "Prev";
+                button += plugin.options.buttonPrevText;
                 button += "</button>"
                 button += "<button class=\"djr-slider-button djr-s-button-next\" data-dir=\"next\">";
-                button += "Next";
+                button += plugin.options.buttonNextText;
                 button += "</button>";
                 button += "</div>";
 
                 plugin.$elem.parent().append(button).find(".djr-slider-button").on("click", controllerHandler);
+                if(plugin.options.buttonClass) {
+                    plugin.$elem.parent().find(".djr-slider-controller").addClass(plugin.options.buttonClass);
+                }
 
             }
             function controllerHandler() {
@@ -168,7 +171,10 @@ if (typeof Object.create !== 'function') {
         "height": 100,
         "width": 300,
         "time": 4500,
-        "animationTime": 1000
+        "animationTime": 1000,
+        "buttonClass": "",
+        "buttonNextText": "Next",
+        "buttonPrevText": "Prev"
     }
 
 })(jQuery, window, document);
